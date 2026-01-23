@@ -2,14 +2,46 @@
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_pixels.h>
+#include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_surface.h>
 #include <SDL2/SDL_video.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <time.h>
 
 // Screen dimension constants
 const int SCREEN_WIDTH = 1200;
 const int SCREEN_HEIGHT = 600;
+const int NUM_BARS = 100;
+const int MAX_VALUE = 100;
+
+void initialize_array(int *array) {
+  srand(time(NULL));
+  for (int i = 0; i < NUM_BARS; i++) {
+    array[i] = rand() % MAX_VALUE + 1;
+  }
+}
+
+void draw_bars(SDL_Surface *surface, int *array, int n) {
+  int background_color = SDL_MapRGB(surface->format, 36, 36, 36);
+  SDL_FillRect(surface, NULL, background_color);
+
+  int bar_width = SCREEN_WIDTH / n;
+
+  for (int i = 0; i < NUM_BARS; i++) {
+    int value = array[i];
+    int bar_height = (value / (float)MAX_VALUE) * (SCREEN_HEIGHT - 40);
+
+    int x = i * bar_width;
+    int y = SCREEN_HEIGHT - bar_height;
+
+    SDL_Rect bar = {x, y, bar_width - 1, bar_height};
+    int bar_color = SDL_MapRGB(surface->format, 24, 251, 169);
+    SDL_FillRect(surface, &bar, bar_color);
+  }
+}
 
 int main(int argc, char *args[]) {
   // the window we'll be rendering to
@@ -17,6 +49,9 @@ int main(int argc, char *args[]) {
 
   // the surface contained by the window
   SDL_Surface *screenSurface = NULL;
+
+  int array[NUM_BARS];
+  initialize_array(array);
 
   // initialize SDL
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
@@ -35,11 +70,7 @@ int main(int argc, char *args[]) {
       // get window surface
       screenSurface = SDL_GetWindowSurface(window);
 
-      // fill the surface white
-      SDL_FillRect(screenSurface, NULL,
-                   SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-
-      // update the surface
+      draw_bars(screenSurface, array, NUM_BARS);
       SDL_UpdateWindowSurface(window);
 
       // hack to get the window to stay up
