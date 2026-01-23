@@ -17,9 +17,8 @@ const int SCREEN_HEIGHT = 600;
 const int NUM_BARS = 100;
 const int MAX_VALUE = 100;
 
-void initialize_array(int *array) {
-  srand(time(NULL));
-  for (int i = 0; i < NUM_BARS; i++) {
+void initialize_array(int *array, int n) {
+  for (int i = 0; i < n; i++) {
     array[i] = rand() % MAX_VALUE + 1;
   }
 }
@@ -30,7 +29,7 @@ void draw_bars(SDL_Surface *surface, int *array, int n) {
 
   int bar_width = SCREEN_WIDTH / n;
 
-  for (int i = 0; i < NUM_BARS; i++) {
+  for (int i = 0; i < n; i++) {
     int value = array[i];
     int bar_height = (value / (float)MAX_VALUE) * (SCREEN_HEIGHT - 40);
 
@@ -50,8 +49,9 @@ int main(int argc, char *args[]) {
   // the surface contained by the window
   SDL_Surface *screenSurface = NULL;
 
+  srand(time(NULL));
   int array[NUM_BARS];
-  initialize_array(array);
+  initialize_array(array, NUM_BARS);
 
   // initialize SDL
   if (SDL_Init(SDL_INIT_VIDEO) < 0) {
