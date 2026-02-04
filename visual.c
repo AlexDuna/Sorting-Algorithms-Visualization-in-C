@@ -66,6 +66,18 @@ void render_algorithm_info(SDL_Surface *surface, TTF_Font *font, int choice,
     name = "Quick Sort";
     complexity = "Time: O(n log n) Space: O(log n)";
     break;
+  case 3:
+    name = "Insertion Sort";
+    complexity = "Time: O(n^2) Space: O(1)";
+    break;
+  case 4:
+    name = "Merge Sort";
+    complexity = "Time: O(n log n) Space: O(n)";
+    break;
+  case 5:
+    name = "Heap Sort";
+    complexity = "Time: O(n log n) Space: O(1)";
+    break;
   default:
     name = "Unknown Algorithm";
     complexity = "";

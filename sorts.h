@@ -14,4 +14,10 @@ void bubble_sort_visual(SDL_Window *window, SDL_Surface *surface, int *array, in
 
 void quick_sort_visual(SDL_Window *window, SDL_Surface *surface, int *array, int n, TTF_Font *font, int choice);
 
+void insertion_sort_visual(SDL_Window *window, SDL_Surface *surface, int *array, int n, TTF_Font *font, int choice);
+
+void merge_sort_visual(SDL_Window *window, SDL_Surface *surface, int *array, int n, TTF_Font *font, int choice);
+
+void heap_sort_visual(SDL_Window *window, SDL_Surface *surface, int *array, int n, TTF_Font *font, int choice);
+
 #endif

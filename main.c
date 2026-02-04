@@ -19,6 +19,9 @@ int main(int argc, char *args[]) {
   printf("Visualize algorithm:\n");
   printf("#1 Bubble Sort\n");
   printf("#2 Quick Sort\n");
+  printf("#3 Insertion Sort\n");
+  printf("#4 Merge Sort\n");
+  printf("#5 Heap Sort\n");
   printf("Choose the algorithm: ");
   scanf("%d", &choice);
 
@@ -72,6 +75,15 @@ int main(int argc, char *args[]) {
     break;
   case 2:
     quick_sort_visual(window, screenSurface, array, NUM_BARS, font, choice);
+    break;
+  case 3:
+    insertion_sort_visual(window, screenSurface, array, NUM_BARS, font, choice);
+    break;
+  case 4:
+    merge_sort_visual(window, screenSurface, array, NUM_BARS, font, choice);
+    break;
+  case 5:
+    heap_sort_visual(window, screenSurface, array, NUM_BARS, font, choice);
     break;
   default:
     printf("The algorithm that you chose doesn't exist in our menu.");
