@@ -24,7 +24,7 @@ void bubble_sort_pure(int *array, int n) {
   }
 }
 
-int partition_pure(int *array, int low, int high, int n) {
+int partition_pure(int *array, int low, int high) {
   int pivot = array[high];
   int i = low - 1;
 
@@ -45,7 +45,7 @@ static void quick_sort_rec(int *array, int low, int high, int n) {
   if (low >= high)
     return;
 
-  int pivotIndex = partition_pure(array, low, high, n);
+  int pivotIndex = partition_pure(array, low, high);
 
   quick_sort_rec(array, low, pivotIndex - 1, n);
   quick_sort_rec(array, pivotIndex + 1, high, n);
@@ -68,7 +68,7 @@ void insertion_sort_pure(int *array, int n) {
 }
 
 static void merge_segments_pure(int *array, int left, int mid, int right,
-                                int *temp, int n) {
+                                int *temp) {
   int i = left;
   int j = mid + 1;
   int k = left;
@@ -111,7 +111,7 @@ static void merge_sort_rec(int *array, int left, int right, int *temp, int n) {
   merge_sort_rec(array, left, mid, temp, n);
   merge_sort_rec(array, mid + 1, right, temp, n);
 
-  merge_segments_pure(array, left, mid, right, temp, n);
+  merge_segments_pure(array, left, mid, right, temp);
 }
 
 void merge_sort_pure(int *array, int n) {

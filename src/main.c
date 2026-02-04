@@ -10,7 +10,7 @@
 #include "sorts.h"
 #include "visual.h"
 
-int main(int argc, char *args[]) {
+int main() {
   srand(time(NULL));
   int array[NUM_BARS];
   initialize_array(array, NUM_BARS);
